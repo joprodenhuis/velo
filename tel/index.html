@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device, width intial-scale=1">
+	<title>Velocitas Soundboard</title>
+	<link rel="icon" type="image/png" href="velo.png">
+
+	<style>
+		html {
+		  box-sizing: border-box;
+		}
+
+		*, *:before, *:after {
+		  box-sizing: inherit;
+		}
+
+		body {
+			background-color: grey;
+			margin: 0;
+			padding: 0;
+		}
+
+		img {
+  			max-width: 100%;
+  			font-style: italic;
+  			vertical-align: middle;
+		}
+
+		img[width],
+		img[height] {
+		  max-width: none;
+		}
+
+		.soundboard {
+			display: flex;
+			padding: 5px;
+			flex-wrap: wrap;
+		}
+
+		.soundboard__item {
+			padding: 5px;
+			width: 100%;
+		}
+
+		.soundboard__thumb img {
+			width: 100%;
+			height: 40%;
+		}
+
+
+		.soundboard__options {
+			display: flex;
+		}
+
+		.soundboard__options button {
+			display: block;
+			width: 50%;
+		}
+
+		button {
+			height: 50px;
+			width: 50%;
+			font-size: 18px;
+			border: 1px solid black;
+			background-color: white;
+			color: black;
+		}
+
+		button:first-child:focus {
+			background-color: red;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div class="soundboard">
+
+		<div class="soundboard__item">
+			<audio id="oplopen">
+		  		<source src="sounds/oplopen.mp3" type="audio/mpeg">
+			</audio>
+
+			<div class="soundboard__thumb">
+				<img src="thumbs/here-we-go.jpg">
+			</div>
+
+			<div class="soundboard__options">
+				<button onclick="playOplopen()" type="button">Play</button>
+				<button onclick="pauseOplopen()" type="button">Pause</button> 
+			</div>
+		</div>
+
+		<div class="soundboard__item">
+			<audio id="klaarvoor">
+		  		<source src="sounds/klaarvoor.mp3" type="audio/mpeg">
+			</audio>
+
+			<div class="soundboard__thumb">
+				<img src="thumbs/zijn-we-er-klaar-voor.jpg">
+			</div>
+
+			<div class="soundboard__options">
+				<button onclick="playKlaarvoor()" type="button">Play</button>
+				<button onclick="pauseKlaarvoor()" type="button">Pause</button> 
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	var a = document.getElementById("oplopen"); 
+
+	function playOplopen() { 
+  		a.play(); 
+	} 
+
+	function pauseOplopen() { 
+  		a.pause();
+  		a.currentTime = 0;  
+	} 
+
+	var b = document.getElementById("klaarvoor"); 
+
+	function playKlaarvoor() { 
+  		b.play(); 
+	} 
+
+	function pauseKlaarvoor() { 
+  		b.pause();
+  		b.currentTime = 0;  
+	} 
+
+	document.addEventListener('play', function(e){
+    	var audios = document.getElementsByTagName('audio');
+    	for(var i = 0, len = audios.length; i < len;i++){
+        	if(audios[i] != e.target){
+            	audios[i].pause();
+            	audios[i].currentTime = 0;
+        	}
+    	}
+	}, true);
+</script>
+</html>
